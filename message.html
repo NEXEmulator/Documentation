@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEX Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background:
+                linear-gradient(#ffffff08 1px, transparent 1px) 0 0 / 40px 40px,
+                linear-gradient(90deg, #ffffff08 1px, transparent 1px) 0 0 / 40px 40px,
+                linear-gradient(90deg, #FF94CE40, #C579E540, #7496FC40),
+                #000;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        header {
+            padding: 30px 60px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            width: 300px;
+            padding: 40px 30px;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            min-height: calc(100vh - 121px);
+        }
+
+        .sidebar h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 15px 20px;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 16px;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .content {
+            flex: 1;
+            padding: 60px 80px;
+        }
+
+        .content h1 {
+            font-size: 56px;
+            margin-bottom: 30px;
+            color: #fff;
+            font-weight: 900;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content h2 {
+            font-size: 36px;
+            margin-top: 60px;
+            margin-bottom: 25px;
+            color: #fff;
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .content h3 {
+            font-size: 24px;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+
+        .content p {
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            white-space: pre;
+        }
+
+        .code-blockx {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 30px;
+            }
+
+            .logo-text {
+                font-size: 24px;
+                letter-spacing: 2px;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                min-height: auto;
+                padding: 20px 30px;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            }
+
+            .sidebar h3 {
+                margin-bottom: 15px;
+            }
+
+            .nav-item {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 30px 30px;
+            }
+
+            .content h1 {
+                font-size: 36px;
+                margin-bottom: 20px;
+                padding-bottom: 20px;
+            }
+
+            .content h2 {
+                font-size: 28px;
+                margin-top: 40px;
+                margin-bottom: 20px;
+            }
+
+            .content h3 {
+                font-size: 20px;
+                margin-top: 25px;
+                margin-bottom: 12px;
+            }
+
+            .content p {
+                font-size: 15px;
+            }
+
+            .code-block, .code-blockx {
+                padding: 20px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-text">NEX Documentation</div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Documentation</h3>
+            <a class="nav-item active" data-tab="functions">NEX Functions</a>
+            <a class="nav-item" data-tab="qol">QoL Functions</a>
+            <a class="nav-item" data-tab="compiling">Compiling</a>
+            <a class="nav-item" data-tab="plugins">Plugins</a>
+            <a class="nav-item" data-tab="settings">Settings</a>
+        </aside>
+
+        <main class="content">
+            <div id="functions" class="section active">
+                <h1>NEX Functions</h1>
+                <h3>LoadLocalAsset(filepath:string):Instance</h3>
+                <p>Loads the specified file and returns the loaded object.</p>
+
+                <h3>Example Usage</h3>
+                <div class="code-blockx">local FilePath="Object.rbxm"
+local FileData=FILEDATA
+repeat task.wait() until NEX_Loaded
+if not Settings.FilesEnabled then
+warn("Please turn on FilesEnabled in settings!")
+end
+writefile(FilePath,FileData)
+repeat task.wait() until isfile(FilePath) --reccommended
+local Object=LoadLocalAsset(FilePath)
+--Code using the Object</div>
+              <p>Accuracy: NEX Developed</p>
+    <h2></h2>
+    <h3>getcustomasset(filepath:string, content:string):string</h3>
+    <p>Creates a rbxasset with the provided content and returns it.</p>
+
+    <h3>Example Usage</h3>
+    <div class="code-blockx">local FilePath="flower.png"
+local FileData=FILEDATA
+repeat task.wait() until NEX_Loaded
+if not Settings.FilesEnabled then
+warn("Please enable FilesEnabled in settings!")
+end
+writefile(FilePath,FileData)
+repeat task.wait() until isfile(FilePath)
+local rbxasset=getcustomasset(FilePath)
+--example usage: Classes.Tool.Texture=rbxasset
+--example return: rbxassetid://aoNeizgs.png</div>
+              <p>Accuracy: NEX Developed</p>
+              <h2></h2>
+              <h3>InsertAsset(AssetId:string):Instance</h3>
+              <p>Loads the AssetId and returns the loaded object.</p>
+              <h3>Example Usage</h3>
+              <div class="code-blockx">local FilePath="rbxassetid://ID"
+repeat task.wait() until NEX_Loaded
+local Object=LoadLocalAsset(FilePath)
+--Code using the Object</div>
+              <p>Accuracy: NEX Approved</p>
+                <h2></h2>
+                <h3>ToastNotify(Table{Title,Text,Icon}:table):string</h3>
+                <p>Sends an offical Toast notification with the specified table properties.</p>
+                
+                <h3>Example Usage</h3>
+                <div class="code-blockx">repeat task.wait() until NEX_Loaded
+ToastNotify({
+    Title="NEX Emulator",
+    Text="NEX",
+    Icon=("rbxassetid://id" or CustomAsset)
+})</div>
+                    <p>Accuracy: Unaccurate (There are more properties that we don't know of.)</p>
+                <h2></h2>
+                <h3>DisconnectFromServer(null):null</h3>
+                <p>Destroys ClientReplicator for effiency, should be used on singleplayer games that do not contain class.Script (class.LocalScript is not affected)</p>
+                <p>Accuracy: NEX Developed</p>
+                <h2></h2>
+                <h3>GetCurrentThread(null):thread</h3>
+                <p>Returns the environment that it had been loaded in's thread.</p>
+                <h3>Example Usage</h3>
+                <div class="code-blockx">repeat task.wait() until NEX_Loaded
+local CurrentThread=GetCurrentThread()
+--code that uses the current thread for some reason. (You could kill the script when it ends for security and effiency?)</div>
+                <p>Accuracy: NEX Developed</p>
+                <h2></h2>
+                <h3>getrenv(null):table</h3>
+                <p>Returns the unedited Roblox environment usually used inside RobloxScripts.</p>
+                <p>Accuracy: NEX Developed</p>
+                <h2></h2>
+                <h3>clonefunction(function):function</h3>
+                <p>Returns a cloned version of the inputted function. (Unaffected by hookfunction)</p>
+                <p>Accuracy: NEX Developed</p>
+                                <h2></h2>
+                <h3>GetRegisteredInstances(null):table</h3>
+                <p>Returns all instances found in Luau's registry. (This does not include non-Instance classed classes such as AuroraScriptService)</p>
+                <p>Accuracy: NEX Developed</p>
+            </div>
+
+            <div id="qol" class="section">
+                <h1>Quality of Life Functions</h1>
+
+                <h2>example section</h2>
+                <h3>example method</h3>
+                <p>example description</p>
+
+                <h3>example code</h3>
+                <div class="code-blockx">-- example script</div>
+
+                <h2>example section</h2>
+                <h3>example method</h3>
+                <p>example description</p>
+
+                <h3>example code</h3>
+                <div class="code-block">-- example script</div>
+            </div>
+
+            <div id="compiling" class="section">
+                <h1>Compiling</h1>
+
+                <h2>example section</h2>
+                <h3>example method</h3>
+                <p>example description</p>
+
+                <h3>example code</h3>
+                <div class="code-blockx">-- example script</div>
+
+                <h2>example section</h2>
+                <h3>example method</h3>
+                <p>example description</p>
+
+                <h3>example code</h3>
+                <div class="code-block">-- example script</div>
+            </div>
+
+            <div id="plugins" class="section">
+                <h1>Plugins</h1>
+
+                <h2>example section</h2>
+                <h3>example method</h3>
+                <p>example description</p>
+
+                <h3>example code</h3>
+                <div class="code-blockx">-- example plugin</div>
+
+                <h2>example section</h2>
+                <h3>example method</h3>
+                <p>example description</p>
+
+                <h3>example code</h3>
+                <div class="code-block">-- example plugin</div>
+            </div>
+
+            <div id="settings" class="section">
+                <h1>Settings</h1>
+
+                <h2>example section</h2>
+                <h3>example method</h3>
+                <p>example description</p>
+
+                <h3>example code</h3>
+                <div class="code-blockx">-- example script</div>
+
+                <h2>example section</h2>
+                <h3>example method</h3>
+                <p>example description</p>
+
+                <h3>example code</h3>
+                <div class="code-block">-- example script</div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const nav = document.querySelectorAll('.nav-item');
+        const pages = document.querySelectorAll('.section');
+
+        nav.forEach(function(item) {
+            item.addEventListener('click', function() {
+                const target = this.getAttribute('data-tab');
+                
+                nav.forEach(function(n) {
+                    n.classList.remove('active');
+                });
+                
+                pages.forEach(function(p) {
+                    p.classList.remove('active');
+                });
+                
+                this.classList.add('active');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+
+        function usyntax() {
+            const blocks = document.querySelectorAll('.code-blockx');
+            
+            for (let i = 0; i < blocks.length; i++) {
+                let code = blocks[i].textContent;
+                let result = '';
+                let pos = 0;
+                
+                const tokens = [];
+                
+                const stringMatch = /"[^"]*"/g;
+                let m;
+                while ((m = stringMatch.exec(code)) !== null) {
+                    tokens.push({start: m.index, end: m.index + m[0].length, type: 'string', val: m[0]});
+                }
+                
+                const commentMatch = /--.*$/gm;
+                while ((m = commentMatch.exec(code)) !== null) {
+                    tokens.push({start: m.index, end: m.index + m[0].length, type: 'comment', val: m[0]});
+                }
+                
+                const keywordMatch = /\b(local|function|end|if|then|else|elseif|for|while|do|repeat|until|return|break|in|and|or|not)\b/g;
+                while ((m = keywordMatch.exec(code)) !== null) {
+                    tokens.push({start: m.index, end: m.index + m[0].length, type: 'keyword', val: m[0]});
+                }
+                
+                const builtinMatch = /\b(print|pairs|ipairs|tonumber|tostring|type|pcall|require|getmetatable|setmetatable)\b/g;
+                while ((m = builtinMatch.exec(code)) !== null) {
+                    tokens.push({start: m.index, end: m.index + m[0].length, type: 'builtin', val: m[0]});
+                }
+                
+                const numberMatch = /\b(\d+)\b/g;
+                while ((m = numberMatch.exec(code)) !== null) {
+                    tokens.push({start: m.index, end: m.index + m[0].length, type: 'number', val: m[0]});
+                }
+                
+                const boolMatch = /\b(true|false|nil)\b/g;
+                while ((m = boolMatch.exec(code)) !== null) {
+                    tokens.push({start: m.index, end: m.index + m[0].length, type: 'bool', val: m[0]});
+                }
+                
+                const propMatch = /([a-zA-Z_]\w*)\.|\\.([a-zA-Z_]\w*)/g;
+                while ((m = propMatch.exec(code)) !== null) {
+                    if (m[1]) {
+                        tokens.push({start: m.index, end: m.index + m[1].length, type: 'prop', val: m[1]});
+                    }
+                    if (m[2]) {
+                        tokens.push({start: m.index + 1, end: m.index + 1 + m[2].length, type: 'prop', val: m[2]});
+                    }
+                }
+                
+                tokens.sort(function(a, b) { return a.start - b.start; });
+                
+                const final = [];
+                for (let j = 0; j < tokens.length; j++) {
+                    const tok = tokens[j];
+                    let overlap = false;
+                    for (let k = 0; k < final.length; k++) {
+                        if (tok.start < final[k].end && tok.end > final[k].start) {
+                            overlap = true;
+                            break;
+                        }
+                    }
+                    if (!overlap) final.push(tok);
+                }
+                
+                final.sort(function(a, b) { return a.start - b.start; });
+                
+                for (let j = 0; j < final.length; j++) {
+                    const tok = final[j];
+                    result += code.substring(pos, tok.start);
+                    
+                    if (tok.type === 'string') {
+                        result += '<span style="color:#CE9178">' + tok.val + '</span>';
+                    } else if (tok.type === 'comment') {
+                        result += '<span style="color:#6A9955">' + tok.val + '</span>';
+                    } else if (tok.type === 'keyword') {
+                        result += '<span style="color:#C586C0">' + tok.val + '</span>';
+                    } else if (tok.type === 'builtin') {
+                        result += '<span style="color:#DCDCAA">' + tok.val + '</span>';
+                    } else if (tok.type === 'number') {
+                        result += '<span style="color:#B5CEA8">' + tok.val + '</span>';
+                    } else if (tok.type === 'bool') {
+                        result += '<span style="color:#569CD6">' + tok.val + '</span>';
+                    } else if (tok.type === 'prop') {
+                        result += '<span style="color:#9CDCFE">' + tok.val + '</span>';
+                    }
+                    
+                    pos = tok.end;
+                }
+                
+                result += code.substring(pos);
+                blocks[i].innerHTML = result;
+            }
+        }
+
+        usyntax();
+    </script>
+</body>
+</html>
